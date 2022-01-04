@@ -11,7 +11,7 @@ init db
 ```
 const {initDB} = require('../db.js');
 let db = await initDB();
-``
+```
 
 init client
 
