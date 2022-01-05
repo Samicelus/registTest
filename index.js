@@ -1,7 +1,7 @@
 const crypto = require('crypto');
 const salt = "b31d$Sjqw=w#dsi"
 const { SMTPClient } = require('emailjs');
-const {USER, PASSWORD, HOST} = require('./email.js');
+const {email:{USER, PASSWORD, HOST}, DBPATH} = require('./config.js');
 const moment = require('moment');
 const email = new SMTPClient({
 	user: USER,
@@ -10,10 +10,26 @@ const email = new SMTPClient({
 	ssl: true,
 });
 const _ = require('lodash');
+const sqlite3 = require('sqlite3');
+const {open} = require('sqlite');
+
+
 
 class Client {
-    constructor(db){
-        this.db = db;
+    constructor(){
+        this.db;
+        this.dbReady = false;
+        this.initDB();
+    }
+
+    async initDB(){
+        this.db = await open({
+            filename: DBPATH,
+            driver: sqlite3.Database
+        })
+        await this.db.exec("CREATE TABLE if not exists user(login VARCHAR(100), password VARCHAR(100), status VARCHAR(10), code VARCHAR(10), activeDate VARCHAR(10))")
+        this.dbReady = true;
+        console.log('db is ready')
     }
 
     /**

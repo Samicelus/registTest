@@ -6,11 +6,18 @@ npm install
 
 # Use
 
-init db
+config
 
 ```
-const {initDB} = require('../db.js');
-let db = await initDB();
+//./config.js
+module.exports = {
+    email:{
+        USER: '50893818@qq.com',        //set system email sender
+        PASSWORD: '***********',        //config authorization from server
+        HOST: 'smtp.qq.com'             //smtp address
+    },
+    DBPATH: './user.db'                 //db file path
+}
 ```
 
 init client
@@ -18,6 +25,10 @@ init client
 ```
 const Client = require('../index.js');
 let client = new Client(db);
+//wait util db is ready
+setTimeout(async ()=>{
+    //Custom your code here
+},1000)
 ```
 
 regist new user

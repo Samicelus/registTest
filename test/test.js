@@ -1,13 +1,9 @@
-const {initDB} = require('../db.js')
 const Client = require('../index.js')
-async function run(){
-    try{
-        let db = await initDB();
-        let client = new Client(db);
-        await client.listRecentReg();
-    }catch(e){
-        console.error(e);
-    }
+try{
+    let client = new Client();
+    setTimeout(async ()=>{
+        await client.registUser('samicelus@hotmail.com', '09876yuiop;lkjh')
+    },1000)
+}catch(e){
+    console.error(e);
 }
-
-run()
