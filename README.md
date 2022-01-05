@@ -13,7 +13,7 @@ config
 module.exports = {
     email:{
         USER: '50893818@qq.com',        //set system email sender
-        PASSWORD: '***********',        //config authorization from server
+        PASSWORD: '***********',        //config authorization from your smtp service provider
         HOST: 'smtp.qq.com'             //smtp address
     },
     DBPATH: './user.db'                 //db file path
